@@ -1,11 +1,11 @@
 # R Programming: Programming Assignment 2
 # 
-# GOAL The goal of this code is to write an R function(s) that can cache the 
-# time-consuming computation of inverting a matrix. There are 2 functions in 
+# GOAL This code inverts a matrix and caches the results. The goal of cache-ing is to 
+# potentially save time on future matrix inversions by pulling up the results stored in 
+# the cache instead of performing the inversion again. There are 2 functions in 
 # this script: makeCacheMatrix() and cacheSolve (). They are described below. 
 #
 # Created by Lina Colucci, 26 Sept 2015
-
 
 
 # makeCacheMatrix()
@@ -24,7 +24,7 @@ makeCacheMatrix <- function(x = matrix()) {
         get <- function() x
         setinverse <- function(inverse) m <<- inverse
         getinverse <- function() m
-        list(set = set, get=get, 
+        list(set = set, get=get,      #Cache the results
              setinverse = setinverse,
              getinverse = getinverse)
 }
@@ -46,7 +46,7 @@ cacheSolve <- function(x, ...) {
                 return(m)
         }
         data <- x$get()
-        m <- solve(data, ...)
+        m <- solve(data, ...) #Invert the matrix
         x$setinverse(m)
         m
 }
